@@ -1,14 +1,15 @@
 import { Button, FormLayout, Layout, Page, RangeSlider } from "@shopify/polaris";
-import axios from "axios";
-import { useCallback, useState } from "react";
+import useAxios from "./hooks/useAxios.js";
 
 
 const App = () => {
+    const {axios} = useAxios();
     const [options, setOptions] = useState({count: 5});
     const handleProductCountChange = useCallback(
         (value) => setOptions((prevOptions) => ({...prevOptions, count: value}))
     );
 
+    // Dummy API Call
     const createFakeProducts = useCallback( async() => {
         const {data} = await axios.post("/products", options);
         console.log("Axios Says: ", data.msg);
